@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "And that harry my son is pruning time.",
+    "audio_path": "flashcards/audio/flashcard_209_216.wav",
+    "gif_path": "flashcards/gifs/flashcard_209_216.gif",
+    "timestamp": "03:31"
+  },
+  "back": {
+    "phonetic": "ənd ðət ˈhɛri maɪ sən ɪz ˈprunɪŋ taɪm"
+  },
+  "id": 6,
+  "timestamp": 211.779,
+  "sentence": "And that harry my son is pruning time.",
+  "audio_path": "flashcards/audio/flashcard_209_216.wav",
+  "gif_path": "flashcards/gifs/flashcard_209_216.gif"
+}

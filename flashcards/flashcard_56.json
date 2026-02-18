@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "I'm not something of a curve ball.",
+    "audio_path": "flashcards/audio/flashcard_429_432.wav",
+    "gif_path": "flashcards/gifs/flashcard_429_432.gif",
+    "timestamp": "07:11"
+  },
+  "back": {
+    "phonetic": "aɪ ɛm nɑt ˈsəmθɪŋ əv ə kərv bɔl"
+  },
+  "id": 56,
+  "timestamp": 431.248,
+  "sentence": "I'm not something of a curve ball.",
+  "audio_path": "flashcards/audio/flashcard_429_432.wav",
+  "gif_path": "flashcards/gifs/flashcard_429_432.gif"
+}

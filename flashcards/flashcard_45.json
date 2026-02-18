@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "Oh, wait a long face.",
+    "audio_path": "flashcards/audio/flashcard_2606_2610.wav",
+    "gif_path": "flashcards/gifs/flashcard_2606_2610.gif",
+    "timestamp": "43:27"
+  },
+  "back": {
+    "phonetic": "oʊ weɪt ə lɔŋ feɪs"
+  },
+  "id": 45,
+  "timestamp": 2607.673,
+  "sentence": "Oh, wait a long face.",
+  "audio_path": "flashcards/audio/flashcard_2606_2610.wav",
+  "gif_path": "flashcards/gifs/flashcard_2606_2610.gif"
+}

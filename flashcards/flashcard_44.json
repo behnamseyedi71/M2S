@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "The school needs it. He got a buzz cut.",
+    "audio_path": "flashcards/audio/flashcard_2565_2567.wav",
+    "gif_path": "flashcards/gifs/flashcard_2565_2567.gif",
+    "timestamp": "42:46"
+  },
+  "back": {
+    "phonetic": "ðə skul nidz ɪt hi gɑt ə bəz kət"
+  },
+  "id": 44,
+  "timestamp": 2566.632,
+  "sentence": "The school needs it. He got a buzz cut.",
+  "audio_path": "flashcards/audio/flashcard_2565_2567.wav",
+  "gif_path": "flashcards/gifs/flashcard_2565_2567.gif"
+}

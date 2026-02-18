@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "R-G, you are much better.",
+    "audio_path": "flashcards/audio/flashcard_157_160.wav",
+    "gif_path": "flashcards/gifs/flashcard_157_160.gif",
+    "timestamp": "02:39"
+  },
+  "back": {
+    "phonetic": "ɑr ʤi ju ər məʧ ˈbɛtər"
+  },
+  "id": 10,
+  "timestamp": 159.727,
+  "sentence": "R-G, you are much better.",
+  "audio_path": "flashcards/audio/flashcard_157_160.wav",
+  "gif_path": "flashcards/gifs/flashcard_157_160.gif"
+}

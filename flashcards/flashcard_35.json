@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "You said the other day that she didn't like me.",
+    "audio_path": "flashcards/audio/flashcard_2033_2037.wav",
+    "gif_path": "flashcards/gifs/flashcard_2033_2037.gif",
+    "timestamp": "33:54"
+  },
+  "back": {
+    "phonetic": "ju sɛd ðə ˈəðər deɪ ðət ʃi didn* ti laɪk mi"
+  },
+  "id": 35,
+  "timestamp": 2034.684,
+  "sentence": "You said the other day that she didn't like me.",
+  "audio_path": "flashcards/audio/flashcard_2033_2037.wav",
+  "gif_path": "flashcards/gifs/flashcard_2033_2037.gif"
+}

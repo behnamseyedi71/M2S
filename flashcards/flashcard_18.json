@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "Archer was a grass.",
+    "audio_path": "flashcards/audio/flashcard_782_785.wav",
+    "gif_path": "flashcards/gifs/flashcard_782_785.gif",
+    "timestamp": "13:03"
+  },
+  "back": {
+    "phonetic": "ˈɑrʧər wɑz ə græs"
+  },
+  "id": 18,
+  "timestamp": 783.684,
+  "sentence": "Archer was a grass.",
+  "audio_path": "flashcards/audio/flashcard_782_785.wav",
+  "gif_path": "flashcards/gifs/flashcard_782_785.gif"
+}

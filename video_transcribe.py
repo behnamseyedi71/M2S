@@ -24,8 +24,37 @@ import json
 import subprocess
 from pathlib import Path
 
+# ============================================================================
+# TRANSCRIPTION ACCURACY CONFIGURATION
+# ============================================================================
+# Whisper Model Options (in order of accuracy, slowest to fastest):
+#   - "large"   : Best accuracy, slowest (requires ~10GB RAM, GPU recommended)
+#   - "medium"  : Very good accuracy, slower (requires ~5GB RAM)
+#   - "small"   : Good accuracy, moderate speed (default, recommended)
+#   - "base"    : Decent accuracy, faster
+#   - "tiny"    : Basic accuracy, fastest
+#
+# Language: Set to language code (e.g., "en" for English, "es" for Spanish)
+#           Set to None for auto-detection (less accurate)
+# ============================================================================
+WHISPER_MODEL = "small"  # Change to "medium" or "large" for better accuracy
+TRANSCRIPTION_LANGUAGE = "en"  # Set to None for auto-detection
+# ============================================================================
+
 class SmartVideoPlayer:
-    def __init__(self, root, video_path):
+    def __init__(self, root, video_path, whisper_model="small", transcription_language="en"):
+        """
+        Initialize Smart Video Player
+        
+        Args:
+            root: Tkinter root window
+            video_path: Path to video file
+            whisper_model: Whisper model size - "tiny", "base", "small", "medium", "large"
+                          Larger models = better accuracy but slower
+                          Recommended: "small" (good balance) or "medium" (best accuracy)
+            transcription_language: Language code (e.g., "en" for English, "es" for Spanish)
+                                  Set to None for auto-detection
+        """
         self.root = root
         self.root.title("Smart Video Player & Transcriber")
         self.root.geometry("1600x900")  # Larger window for better video viewing
@@ -34,6 +63,8 @@ class SmartVideoPlayer:
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
         
         self.video_path = video_path
+        self.whisper_model_name = whisper_model
+        self.transcription_language = transcription_language
         self.segments = [] # Will hold text segments with timestamps
         self.displayed_segments_count = 0  # Track how many segments we've displayed
         self.is_playing = False
@@ -257,14 +288,14 @@ class SmartVideoPlayer:
             self.root.after(0, lambda msg=error_msg_copy: self.show_error(msg))
     
     def real_time_transcribe(self):
-        """Transcribe audio in real-time while video is playing"""
+        """Transcribe audio in real-time while video is playing with improved accuracy settings"""
         try:
-            print("Loading Whisper model for real-time transcription...")
-            # Use device="cpu" and enable threading for multi-core
+            print(f"Loading Whisper model '{self.whisper_model_name}' for real-time transcription...")
+            print("Note: Larger models (small/medium/large) provide better accuracy but are slower.")
             import torch
             device = "cuda" if torch.cuda.is_available() else "cpu"
-            model = whisper.load_model("base", device=device)
-            print(f"Model loaded on {device}, starting real-time transcription...")
+            model = whisper.load_model(self.whisper_model_name, device=device)
+            print(f"Model '{self.whisper_model_name}' loaded on {device}, starting real-time transcription...")
             
             # Use clip_timestamps to process in chunks as video plays
             import numpy as np
@@ -276,12 +307,13 @@ class SmartVideoPlayer:
             total_duration = len(audio) / sample_rate
             
             print(f"Video duration: {total_duration:.1f} seconds")
-            print("Processing transcription in chunks with multi-core support...")
+            print("Processing transcription in chunks with improved accuracy settings...")
             
             # Process in smaller chunks (10 seconds) for smoother updates
             chunk_duration = 10.0
             all_segments = []
             processed_time = 0.0
+            previous_text = ""  # For context continuity
             
             while processed_time < total_duration and self.transcription_running:
                 chunk_end = min(processed_time + chunk_duration, total_duration)
@@ -296,18 +328,38 @@ class SmartVideoPlayer:
                 
                 print(f"Transcribing chunk: {processed_time:.1f}s - {chunk_end:.1f}s")
                 
-                # Transcribe chunk with optimized settings for speed
-                # Use faster settings: greedy decoding (beam_size=1) and lower temperature
-                result = model.transcribe(
-                    audio_chunk, 
-                    verbose=False,
-                    condition_on_previous_text=(processed_time > 0),
-                    initial_prompt="",
-                    temperature=0.0,  # Deterministic, faster
-                    beam_size=1,  # Greedy decoding - much faster than beam_size=5
-                    best_of=1,  # No sampling, faster
-                    fp16=(device == "cuda")  # Use FP16 on GPU for speed
-                )
+                # Transcribe chunk with improved accuracy settings
+                # Use beam search for better accuracy (beam_size=5 is default and recommended)
+                # Use word_timestamps for better word-level accuracy
+                # Use language specification for better accuracy
+                # Use temperature schedule (Whisper's default) for better handling of different speech patterns
+                # Note: Not specifying temperature uses Whisper's default schedule [0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
+                #       which tries multiple temperatures and picks the best result (better accuracy)
+                transcribe_options = {
+                    "verbose": False,
+                    "condition_on_previous_text": (processed_time > 0),
+                    "word_timestamps": True,  # Better word-level accuracy
+                    "beam_size": 5,  # Beam search for better accuracy (vs greedy decoding)
+                    "best_of": 5,  # Try multiple samples and pick best
+                    "fp16": (device == "cuda"),  # Use FP16 on GPU for speed
+                    # Temperature not specified = uses default schedule for best accuracy
+                }
+                
+                # Add language if specified (improves accuracy)
+                if self.transcription_language:
+                    transcribe_options["language"] = self.transcription_language
+                
+                # Add initial prompt with context from previous segment for continuity
+                if previous_text:
+                    # Use last 50 words as context
+                    context_words = previous_text.split()[-50:]
+                    transcribe_options["initial_prompt"] = " ".join(context_words)
+                
+                result = model.transcribe(audio_chunk, **transcribe_options)
+                
+                # Update previous_text for next chunk
+                if result.get('text'):
+                    previous_text = result['text']
                 
                 # Adjust timestamps to account for chunk offset
                 new_segments = []
@@ -1630,8 +1682,9 @@ def find_video_and_play():
         return
 
     print(f"Loading video: {video_file}")
+    print(f"Transcription settings: Model={WHISPER_MODEL}, Language={TRANSCRIPTION_LANGUAGE or 'auto'}")
     root = tk.Tk()
-    app = SmartVideoPlayer(root, video_file)
+    app = SmartVideoPlayer(root, video_file, whisper_model=WHISPER_MODEL, transcription_language=TRANSCRIPTION_LANGUAGE)
     root.mainloop()
 
 if __name__ == "__main__":

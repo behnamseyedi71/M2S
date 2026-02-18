@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "Tempting as it is, Brendan, I packed my own sandwich today.",
+    "audio_path": "flashcards/audio/flashcard_623_626.wav",
+    "gif_path": "flashcards/gifs/flashcard_623_626.gif",
+    "timestamp": "10:23"
+  },
+  "back": {
+    "phonetic": "ˈtɛmptɪŋ ɛz ɪt ɪz ˈbrɛndən aɪ pækt maɪ oʊn ˈsænwɪʧ təˈdeɪ"
+  },
+  "id": 62,
+  "timestamp": 623.983,
+  "sentence": "Tempting as it is, Brendan, I packed my own sandwich today.",
+  "audio_path": "flashcards/audio/flashcard_623_626.wav",
+  "gif_path": "flashcards/gifs/flashcard_623_626.gif"
+}

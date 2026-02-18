@@ -1,0 +1,16 @@
+{
+  "front": {
+    "sentence": "What's your proposition?",
+    "audio_path": "flashcards/audio/flashcard_939_943.wav",
+    "gif_path": "flashcards/gifs/flashcard_939_943.gif",
+    "timestamp": "15:41"
+  },
+  "back": {
+    "phonetic": "wət ɛs jʊr ˌprɑpəˈzɪʃən"
+  },
+  "id": 20,
+  "timestamp": 941.717,
+  "sentence": "What's your proposition?",
+  "audio_path": "flashcards/audio/flashcard_939_943.wav",
+  "gif_path": "flashcards/gifs/flashcard_939_943.gif"
+}

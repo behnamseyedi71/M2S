@@ -1,3 +1,9 @@
+# M2S
+
+This simple script makes Anki flash cards using your desired movie.
+
+---
+
 # Real-time Video Player with Speech-to-Text Transcription
 
 A Python script that plays video files while simultaneously performing real-time speech-to-text transcription using OpenAI's Whisper model.
@@ -89,7 +95,7 @@ You can change the Whisper model size in the script by modifying the `model_size
 
 Edit line in `main()`:
 ```python
-transcriber = AudioTranscriber(video_path, transcription_queue, 
+transcriber = AudioTranscriber(video_path, transcription_queue,
                               model_size="base")  # Change here
 ```
 
@@ -121,4 +127,3 @@ transcriber = AudioTranscriber(video_path, transcription_queue,
 ## License
 
 This script is provided as-is for educational and personal use.
-
